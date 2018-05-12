@@ -2,3 +2,4 @@ CMakeFiles
 CmakeCache.txt
 *.cmake
 bin
+Makefile
