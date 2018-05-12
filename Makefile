@@ -123,6 +123,33 @@ efc/fast:
 	$(MAKE) -f CMakeFiles/efc.dir/build.make CMakeFiles/efc.dir/build
 .PHONY : efc/fast
 
+src/futhark.o: src/futhark.c.o
+
+.PHONY : src/futhark.o
+
+# target to build an object file
+src/futhark.c.o:
+	$(MAKE) -f CMakeFiles/efc.dir/build.make CMakeFiles/efc.dir/src/futhark.c.o
+.PHONY : src/futhark.c.o
+
+src/futhark.i: src/futhark.c.i
+
+.PHONY : src/futhark.i
+
+# target to preprocess a source file
+src/futhark.c.i:
+	$(MAKE) -f CMakeFiles/efc.dir/build.make CMakeFiles/efc.dir/src/futhark.c.i
+.PHONY : src/futhark.c.i
+
+src/futhark.s: src/futhark.c.s
+
+.PHONY : src/futhark.s
+
+# target to generate assembly for a file
+src/futhark.c.s:
+	$(MAKE) -f CMakeFiles/efc.dir/build.make CMakeFiles/efc.dir/src/futhark.c.s
+.PHONY : src/futhark.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... efc"
+	@echo "... src/futhark.o"
+	@echo "... src/futhark.i"
+	@echo "... src/futhark.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
