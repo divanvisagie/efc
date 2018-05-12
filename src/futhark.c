@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <limits.h>
+#include <ctype.h>
 
 static char* const  fehu     = "ᚠ";
 static char* const  uruz     = "ᚢ";
@@ -40,6 +40,11 @@ struct latin_rune_pair latin_rune_pairs[] = {
 	{ "a" ,  ansuz },
 	{ "b" ,  berkanan },
 	{ "c",   kaunan },
+	{ "d",   dagaz },
+	{ "e",   ehwaz },
+	{ "f",   fehu },
+	{ "g",   gebo },
+	{ "h",   hagalaz },
 	{ "ei",  sowilo }
 };
 
@@ -128,13 +133,69 @@ void init_futhark() {
 	// "q": kaunan,
 }
 
+/**
+ * Taken from https://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/
+*/
+char* replace(char* s, char* victim, char* with) {
+    char *result;
+    int i, cnt = 0;
+    int withlen = strlen(with);
+    int victimlen = strlen(victim);
+ 
+    // Counting the number of times old word
+    // occur in the string
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        if (strstr(&s[i], victim) == &s[i])
+        {
+            cnt++;
+ 
+            // Jumping to index after the old word.
+            i += victimlen - 1;
+        }
+    }
+ 
+    // Making new string of enough length
+    result = (char *)malloc(i + cnt * (withlen - victimlen) + 1);
+ 
+    i = 0;
+    while (*s)
+    {
+        // compare the substring with the result
+        if (strstr(s, victim) == s)
+        {
+            strcpy(&result[i], with);
+            i += withlen;
+            s += victimlen;
+        }
+        else
+            result[i++] = *s++;
+    }
+ 
+    result[i] = '\0';
+    return result;
+}
+
+char* to_lower_case(char *s) {
+  unsigned char *p = (unsigned char *)s;
+
+  while (*p) {
+     *p = tolower((unsigned char)*p);
+      p++;
+  }
+
+  return s;
+}
 
 char* get_futhark_for_latin(char* latin) {
+	latin = to_lower_case(strdup(latin));
 	int size = sizeof(latin_rune_pairs)/sizeof(struct latin_rune_pair);
+	
 	for(int i=0; i < size; i++) {
-		printf("%s -> %s \n", latin_rune_pairs[i].latin, latin_rune_pairs[i].rune);
+		latin = replace(latin, latin_rune_pairs[i].latin, latin_rune_pairs[i].rune);
 	}
 
+	free(latin);
     return latin;
 }
 
