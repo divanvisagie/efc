@@ -124,8 +124,11 @@ void deinit_futhark() {
 }
 
 char* get_futhark_for_latin(char* latin) {
-    char* val = *map_get(&latin_futhark_map, latin);
-    return val;
+    char** val = map_get(&latin_futhark_map, latin);
+	if (!val) {
+		return latin;
+	}
+    return *val;
 }
 
 
