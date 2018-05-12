@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
-#include "futhark.h"
 
 const int TABLE_SIZE = 30;
 
