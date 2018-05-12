@@ -15,3 +15,7 @@ make
 ```
 
 This will output the binary to `./bin/efc`
+
+## License
+
+GPLv2
