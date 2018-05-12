@@ -5,3 +5,13 @@ A text converter for the elder futhark,designed as a linux/unix command and a pe
 
 
 
+## Building 
+
+Cmake is used for building the program, run the following to get started quickly
+
+```sh
+cmake .
+make
+```
+
+This will output the binary to `./bin/efc`
