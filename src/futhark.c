@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 static char* const  fehu     = "ᚠ";
 static char* const  uruz     = "ᚢ";
@@ -34,8 +35,13 @@ static char* const	dagaz    = "ᛞ";
 static char* const othala_ehwaz  = "ᛟᛖ";
 static char* const kaunan_sowilo = "ᚲᛋ";
 static char* const ansuz_ansuz   = "ᚨ";
+static char* const hagalaz_raido = "ᚺᚱ";
+static char* const hagalaz_jera  = "ᚺᛃ";
+static char* const ingwaz_kaunan = "ᛜᚲ";
+static char* const hagalaz_wunjo = "ᚺᚹ";
+static char* const hagalaz_laguz = "ᚺᛚ";
 
-struct latin_rune_pair {
+typedef struct latin_rune_pair {
 	char* latin;
 	char* rune;
 };
@@ -82,12 +88,25 @@ struct latin_rune_pair latin_rune_pairs[] = {
 };
 
 struct latin_rune_pair latin_sound_rune_pair[] = {
-	// map_set(&latin_futhark_map, "ch", gebo);
-	// map_set(&latin_futhark_map, "ij", ehwaz);
-	// map_set(&latin_futhark_map, "cc" , x);
 
-	// map_set(&latin_futhark_map, "th",  thurisaz);
-	// map_set(&latin_futhark_map, "eau", othala);
+    /**
+     * The longer phonetics must go first because they are more unique and will 
+     * not be replaced by the shorter strings later.
+    */
+    { "eau",  othala },
+	{ "chr",  hagalaz_raido },
+	{ "ing",  ingwaz },
+	{ "chl",  hagalaz_laguz },
+	{ "chj",  hagalaz_jera },
+	{ "chw",  hagalaz_wunjo },
+
+	{ "ch" , gebo },
+	{ "ij" , ehwaz },
+	{ "cc" , kaunan_sowilo },
+	{ "th" ,  thurisaz },
+	{ "ng" ,  ingwaz },
+	{ "nk" ,  ingwaz_kaunan },
+	{ "ei" ,  sowilo }
 };
 
 
@@ -145,16 +164,20 @@ char* to_lower_case(char *s) {
   return s;
 }
 
-char* get_futhark_for_latin(char* latin) {
-	latin = to_lower_case(strdup(latin));
-	int size = sizeof(latin_rune_pairs)/sizeof(struct latin_rune_pair);
+char* replace_characters(char* victim, latin_rune_pair latin_rune_map[]) {
+    victim = to_lower_case(strdup(victim));
+	int size = sizeof(latin_rune_map)/sizeof(latin_rune_pair);
 	
 	for(int i=0; i < size; i++) {
-		latin = replace(latin, latin_rune_pairs[i].latin, latin_rune_pairs[i].rune);
+		victim = replace(victim, latin_rune_map[i].latin, latin_rune_map[i].rune);
 	}
 
-	free(latin);
-    return latin;
+	free(victim);
+    return victim;
+}
+
+char* get_futhark_for_latin(char* latin, bool phonetics) {
+	return replace_characters(latin, latin_rune_pairs);
 }
 
 
