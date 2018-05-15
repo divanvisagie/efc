@@ -31,6 +31,8 @@ static char* const	ingwaz   = "ᛜ";
 static char* const	othala   = "ᛟ";
 static char* const	dagaz    = "ᛞ";
 
+static char* const kaunan_sowilo = "ᚲᛋ";
+
 struct latin_rune_pair {
 	char* latin;
 	char* rune;
@@ -45,32 +47,36 @@ struct latin_rune_pair latin_rune_pairs[] = {
 	{ "f",   fehu },
 	{ "g",   gebo },
 	{ "h",   hagalaz },
-	{ "ei",  sowilo }
+	{ "i",   ingwaz },
+	{ "j",   jera },
+	{ "k",   kaunan },
+	{ "l",   laguz },
+	{ "m",   mannaz },
+	{ "n",   naudiz },
+	{ "o",   othala },
+	{ "p",   perth },
+	{ "q",   kaunan },
+	{ "r",   raido },
+	{ "s",   sowilo },
+    { "t",   tiwaz },
+    { "u",   uruz },
+    { "v",   fehu },
+    { "w",   wunjo },
+    { "x",   kaunan_sowilo },
+    { "y",   jera },
+    { "z",   algiz }
+    
 };
 
 void init_futhark() {
    
     // map_init(&latin_futhark_map);
 
-    // map_set(&latin_futhark_map, "a", ansuz);
-    // map_set(&latin_futhark_map, "b", berkanan);
-    // map_set(&latin_futhark_map, "c", kaunan);
-    // map_set(&latin_futhark_map, "d", dagaz);
+   
 
-    // map_set(&latin_futhark_map, "f", fehu);
-	// map_set(&latin_futhark_map, "u", uruz);
+    /
 	// map_set(&latin_futhark_map, "þ", thurisaz);
-	// map_set(&latin_futhark_map, "a", ansuz);
-	// map_set(&latin_futhark_map, "r", raido);
-	// map_set(&latin_futhark_map, "k", kaunan);
-	// map_set(&latin_futhark_map, "c", kaunan);
-	// map_set(&latin_futhark_map, "g", gebo);
-	// map_set(&latin_futhark_map, "w", wunjo);
-	// map_set(&latin_futhark_map, "h", hagalaz);
-	// map_set(&latin_futhark_map, "n", naudiz);
-	// map_set(&latin_futhark_map, "i", isaz);
-	// map_set(&latin_futhark_map, "j", jera);
-	// map_set(&latin_futhark_map, "y", jera);
+	/
 	// map_set(&latin_futhark_map, "æ", eihwaz);
 	// map_set(&latin_futhark_map, "ï", eihwaz);
 	// map_set(&latin_futhark_map, "p", perth);
