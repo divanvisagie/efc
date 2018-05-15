@@ -1,4 +1,5 @@
 #include "futhark.h"
+#include "string_replacer.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -41,12 +42,13 @@ static char* const ingwaz_kaunan = "ᛜᚲ";
 static char* const hagalaz_wunjo = "ᚺᚹ";
 static char* const hagalaz_laguz = "ᚺᛚ";
 
-typedef struct latin_rune_pair {
+typedef struct  {
 	char* latin;
 	char* rune;
-};
+} latin_rune_pair;
 
-struct latin_rune_pair latin_rune_pairs[] = {
+#define LRP_LEN 33
+latin_rune_pair* latin_rune_pairs[LRP_LEN] = {
 
     // Basic Latin Alphabet
 	{ "a" ,  ansuz },
@@ -87,71 +89,27 @@ struct latin_rune_pair latin_rune_pairs[] = {
 
 };
 
-struct latin_rune_pair latin_sound_rune_pair[] = {
+// latin_rune_pair* latin_sound_rune_pair[] = {
 
-    /**
-     * The longer phonetics must go first because they are more unique and will 
-     * not be replaced by the shorter strings later.
-    */
-    { "eau",  othala },
-	{ "chr",  hagalaz_raido },
-	{ "ing",  ingwaz },
-	{ "chl",  hagalaz_laguz },
-	{ "chj",  hagalaz_jera },
-	{ "chw",  hagalaz_wunjo },
+//     /**
+//      * The longer phonetics must go first because they are more unique and will 
+//      * not be replaced by the shorter strings later.
+//     */
+//     { "eau",  othala },
+// 	{ "chr",  hagalaz_raido },
+// 	{ "ing",  ingwaz },
+// 	{ "chl",  hagalaz_laguz },
+// 	{ "chj",  hagalaz_jera },
+// 	{ "chw",  hagalaz_wunjo },
 
-	{ "ch" , gebo },
-	{ "ij" , ehwaz },
-	{ "cc" , kaunan_sowilo },
-	{ "th" ,  thurisaz },
-	{ "ng" ,  ingwaz },
-	{ "nk" ,  ingwaz_kaunan },
-	{ "ei" ,  sowilo }
-};
-
-
-/**
- * Taken from https://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/
-*/
-char* replace(char* s, char* victim, char* with) {
-    char *result;
-    int i, cnt = 0;
-    int withlen = strlen(with);
-    int victimlen = strlen(victim);
- 
-    // Counting the number of times old word
-    // occur in the string
-    for (i = 0; s[i] != '\0'; i++)
-    {
-        if (strstr(&s[i], victim) == &s[i])
-        {
-            cnt++;
- 
-            // Jumping to index after the old word.
-            i += victimlen - 1;
-        }
-    }
- 
-    // Making new string of enough length
-    result = (char *)malloc(i + cnt * (withlen - victimlen) + 1);
- 
-    i = 0;
-    while (*s)
-    {
-        // compare the substring with the result
-        if (strstr(s, victim) == s)
-        {
-            strcpy(&result[i], with);
-            i += withlen;
-            s += victimlen;
-        }
-        else
-            result[i++] = *s++;
-    }
- 
-    result[i] = '\0';
-    return result;
-}
+// 	{ "ch" , gebo },
+// 	{ "ij" , ehwaz },
+// 	{ "cc" , kaunan_sowilo },
+// 	{ "th" ,  thurisaz },
+// 	{ "ng" ,  ingwaz },
+// 	{ "nk" ,  ingwaz_kaunan },
+// 	{ "ei" ,  sowilo }
+// };
 
 char* to_lower_case(char *s) {
   unsigned char *p = (unsigned char *)s;
@@ -164,12 +122,17 @@ char* to_lower_case(char *s) {
   return s;
 }
 
-char* replace_characters(char* victim, latin_rune_pair latin_rune_map[]) {
+char* replace_characters(char* victim, latin_rune_pair* latin_rune_map[]) {
+
+    // for (int i = 0; i < 33; i++) {
+    //     printf("%s \n", &latin_rune_map[i]->latin);
+    // }
+
     victim = to_lower_case(strdup(victim));
-	int size = sizeof(latin_rune_map)/sizeof(latin_rune_pair);
 	
-	for(int i=0; i < size; i++) {
-		victim = replace(victim, latin_rune_map[i].latin, latin_rune_map[i].rune);
+	for(int i=0; i < LRP_LEN; i++) {
+        printf("%s",&latin_rune_map[i]->latin);
+		// char* v = replace(lowercase, latin_rune_map[i]->latin, latin_rune_map[i]->rune);
 	}
 
 	free(victim);
@@ -177,7 +140,7 @@ char* replace_characters(char* victim, latin_rune_pair latin_rune_map[]) {
 }
 
 char* get_futhark_for_latin(char* latin, bool phonetics) {
-	return replace_characters(latin, latin_rune_pairs);
+    latin = replace_characters(latin, latin_rune_pairs);
+
+    return latin;
 }
-
-
