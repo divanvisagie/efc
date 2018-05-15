@@ -31,7 +31,9 @@ static char* const	ingwaz   = "ᛜ";
 static char* const	othala   = "ᛟ";
 static char* const	dagaz    = "ᛞ";
 
+static char* const othala_ehwaz  = "ᛟᛖ";
 static char* const kaunan_sowilo = "ᚲᛋ";
+static char* const ansuz_ansuz   = "ᚨ";
 
 struct latin_rune_pair {
 	char* latin;
@@ -39,6 +41,8 @@ struct latin_rune_pair {
 };
 
 struct latin_rune_pair latin_rune_pairs[] = {
+
+    // Basic Latin Alphabet
 	{ "a" ,  ansuz },
 	{ "b" ,  berkanan },
 	{ "c",   kaunan },
@@ -64,80 +68,28 @@ struct latin_rune_pair latin_rune_pairs[] = {
     { "w",   wunjo },
     { "x",   kaunan_sowilo },
     { "y",   jera },
-    { "z",   algiz }
-    
+    { "z",   algiz },
+
+    // Extended Latin Alphabet
+	{ "þ",   thurisaz },
+	{ "æ",   eihwaz },
+	{ "ï",   eihwaz },
+	{ "ŋ",   ingwaz },
+	{ "ð",   thurisaz },
+    { "ø",   othala_ehwaz },
+	{ "å",   ansuz_ansuz }
+
 };
 
-void init_futhark() {
-   
-    // map_init(&latin_futhark_map);
-
-   
-
-    /
-	// map_set(&latin_futhark_map, "þ", thurisaz);
-	/
-	// map_set(&latin_futhark_map, "æ", eihwaz);
-	// map_set(&latin_futhark_map, "ï", eihwaz);
-	// map_set(&latin_futhark_map, "p", perth);
-	// map_set(&latin_futhark_map, "z", algiz);
-	// map_set(&latin_futhark_map, "s", sowilo);
-	// map_set(&latin_futhark_map, "t", tiwaz);
-	// map_set(&latin_futhark_map, "b", berkanan);
-	// map_set(&latin_futhark_map, "e", ehwaz);
-	// map_set(&latin_futhark_map, "m", mannaz);
-	// map_set(&latin_futhark_map, "l", laguz);
-	// map_set(&latin_futhark_map, "ŋ", ingwaz);
-	// map_set(&latin_futhark_map, "o", othala);
-	// map_set(&latin_futhark_map, "d", dagaz);
-	// map_set(&latin_futhark_map, "v", fehu);
-	// map_set(&latin_futhark_map, "ð", thurisaz);
-
-    /**
-     * Set x to use the ks sound
-      */
-    // int x_size = sizeof(kaunan) + sizeof(sowilo);
-    // char x[x_size];
-    // sprintf(x, "%s%s", kaunan,sowilo);
-	// map_set(&latin_futhark_map, "x", strdup(x));
-
+struct latin_rune_pair latin_sound_rune_pair[] = {
 	// map_set(&latin_futhark_map, "ch", gebo);
 	// map_set(&latin_futhark_map, "ij", ehwaz);
 	// map_set(&latin_futhark_map, "cc" , x);
 
 	// map_set(&latin_futhark_map, "th",  thurisaz);
 	// map_set(&latin_futhark_map, "eau", othala);
+};
 
-    /**
-     * Set chr to be hr
-    */
-    // char chr[sizeof(char)*2];
-    // strcat(chr, hagalaz);
-    // strcat(chr, raido);
-	// map_set(&latin_futhark_map, "chr", chr);
-
-	// map_set(&latin_futhark_map, "ing", ingwaz);
-
-    /**
-     * Set chl to be hl
-    */
-    // char chl[sizeof(char)*2];
-    // strcat(chl, hagalaz);
-    // strcat(chl, laguz);
-	// map_set(&latin_futhark_map, "chl", chl);
-
-
-	// map_set(&latin_futhark_map, "ng",  ingwaz);
-
-	// "chj": hagalaz + jera,
-	// "nk":  ingwaz + kaunan,
-	// "chw": hagalaz + wunjo,
-	// "ei":  sowilo,
-	// "ø":   othala + ehwaz,
-	// "å":   ansuz + ansuz,
-
-	// "q": kaunan,
-}
 
 /**
  * Taken from https://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/
