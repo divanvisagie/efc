@@ -1,17 +1,20 @@
 #include <stdio.h>
-#include "futhark.h"
 #include <stdbool.h>
 
-int main(int argc, char * argv[]) {
+#include "futhark.h"
+#include "deps/flag/flag.h"
 
-    bool phonetics = true;
+#define VERSION "v0.2.0"
 
-    printf("%s \n", get_futhark_for_latin("z", phonetics));
-    printf("%s \n", get_futhark_for_latin("x", phonetics));
-    printf("%s \n", get_futhark_for_latin("a", phonetics));
-    printf("%s \n", get_futhark_for_latin("ch", phonetics));
+int main(int argc, const char** argv) {
+
+    bool phonetics = false;
+
+
+    flag_bool(&phonetics, "phonetics", "Should we convert phonetics like 'th'?");
+    flag_parse(argc, argv, VERSION);
+
     printf("%s \n", get_futhark_for_latin("the", phonetics));
-    printf("%s \n", get_futhark_for_latin("Hello World", phonetics));
 
 
     return 0;

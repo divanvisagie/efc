@@ -9,4 +9,5 @@ add_executable(efc
     src/main.c 
     src/futhark.c
     src/string_replacer.c
+    src/deps/flag/flag.c
 )
