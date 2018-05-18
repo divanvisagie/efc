@@ -17,6 +17,7 @@ then
       tag=$(git describe --exact-match --tags HEAD)
     echo "Found tag $tag"
     cp install.sh bin/
+    cp efc.1 bin/
     cd bin
     tar czf efc_$TRAVIS_OS_NAME.tar.gz *
     mkdir ../release
