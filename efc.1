@@ -1,0 +1,27 @@
+\" Manpage for efc
+.TH man 1 "18 May 2018" "0.8.0" "efc man page"
+.SH NAME
+efc - convert between Latin alphabet characters and Elder Futhark runes
+.SH SYNOPSIS
+
+echo "Hello World" | efc 
+.SH OPTIONS
+.TP
+.B --phonetic 
+Replace phonetic sounds such as th with ᚦ
+.TP
+.B --reverse 
+Convert Elder Futhark to Latin
+
+.SH DESCRIPTION
+efc is designed to have data piped through it, or to function 
+as a REPL (Read–Eval–Print Loop)
+
+In phonetic mode, when efc runs into characters that are not part of the Elder Futhark
+it will make the decision as to how to most appropriately replace the character.
+
+For example: "x" becomes "ᚲᛋ" because it sounds like cs or ks
+.SH COPYRIGHT
+Copyright © 2017 Divan Visagie.   License  GPLv2
+.SH AUTHOR
+Divan Visagie (me@dvisagie.com)

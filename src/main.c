@@ -9,11 +9,11 @@
 
 int main(int argc, const char** argv) {
 
-    bool phonetics = false;
+    bool phonetic = false;
     bool reverse = false;
 
-    flag_bool(&phonetics, "phonetics", "Should we convert phonetics like 'th'?");
-    flag_bool(&reverse, "reverse", "Convert runes to latin");
+    flag_bool(&phonetic, "phonetic", "Replace phonetic sounds such as th with ᚦ");
+    flag_bool(&reverse, "reverse", "Convert Elder Futhark to Latin");
     flag_parse(argc, argv, VERSION);
 
     /**
@@ -25,11 +25,11 @@ int main(int argc, const char** argv) {
     while ((linelen = getline(&line, &linecap, stdin)) > 0) {
         char* translated = NULL;
         if (reverse) {
-            translated = get_latin_for_futhark(line, phonetics);
+            translated = get_latin_for_futhark(line, phonetic);
         } else {
-            translated = get_futhark_for_latin(line, phonetics);
+            translated = get_futhark_for_latin(line, phonetic);
         }
-        printf("%s", translated);
+        fputs(translated, stdout);
     }
 
     return 0;
