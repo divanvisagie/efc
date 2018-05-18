@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 #include "futhark.h"
@@ -9,13 +10,21 @@
 int main(int argc, const char** argv) {
 
     bool phonetics = false;
-
+    char* read_from_file = "\0";
 
     flag_bool(&phonetics, "phonetics", "Should we convert phonetics like 'th'?");
     flag_parse(argc, argv, VERSION);
 
-    printf("%s \n", get_futhark_for_latin("the", phonetics));
-
+    /**
+     * Read from standard input
+    */
+    char* line = NULL;
+    size_t linecap = 0;
+    ssize_t linelen;
+    while ((linelen = getline(&line, &linecap, stdin)) > 0) {
+        char* translated = get_futhark_for_latin(line, phonetics);
+        printf("%s", translated);
+    }
 
     return 0;
 }
