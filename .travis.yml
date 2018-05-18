@@ -1,0 +1,16 @@
+language: c
+os: linux
+
+compiler:
+  - gcc
+
+script: 
+  - cmake .
+  - make
+
+
+matrix:
+  include:
+      language: c
+    - os: osx
+      osx_image: xcode8
