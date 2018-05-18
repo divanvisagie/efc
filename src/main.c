@@ -10,7 +10,6 @@
 int main(int argc, const char** argv) {
 
     bool phonetics = false;
-    char* read_from_file = "\0";
 
     flag_bool(&phonetics, "phonetics", "Should we convert phonetics like 'th'?");
     flag_parse(argc, argv, VERSION);
