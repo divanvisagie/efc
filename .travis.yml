@@ -1,5 +1,7 @@
 language: c
-os: linux
+os:
+  - linux
+  - osx
 
 compiler:
   - gcc
@@ -9,8 +11,3 @@ script:
   - make
 
 
-matrix:
-  include:
-      language: c
-    - os: osx
-      osx_image: xcode8
