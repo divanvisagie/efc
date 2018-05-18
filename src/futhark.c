@@ -8,39 +8,39 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-static char* const  fehu     = "ᚠ";
-static char* const  uruz     = "ᚢ";
-static char* const  thurisaz = "ᚦ";
-static char* const	ansuz    = "ᚨ";
-static char* const	raido    = "ᚱ";
-static char* const	kaunan   = "ᚲ";
-static char* const	gebo     = "ᚷ";
-static char* const	wunjo    = "ᚹ";
-static char* const	hagalaz  = "ᚺ";
-static char* const	naudiz   = "ᚾ";
-static char* const	isaz     = "ᛁ";
-static char* const	jera     = "ᛃ";
-static char* const	eihwaz   = "ᛇ";
-static char* const	perth    = "ᛈ";
-static char* const	algiz    = "ᛉ";
-static char* const	sowilo   = "ᛋ";
-static char* const	tiwaz    = "ᛏ";
-static char* const	berkanan = "ᛒ";
-static char* const	ehwaz    = "ᛖ";
-static char* const	mannaz   = "ᛗ";
-static char* const	laguz    = "ᛚ";
-static char* const	ingwaz   = "ᛜ";
-static char* const	othala   = "ᛟ";
-static char* const	dagaz    = "ᛞ";
+#define fehu      "ᚠ"
+#define uruz      "ᚢ"
+#define thurisaz  "ᚦ"
+#define ansuz     "ᚨ"
+#define raido     "ᚱ"
+#define kaunan    "ᚲ"
+#define gebo      "ᚷ"
+#define wunjo     "ᚹ"
+#define hagalaz   "ᚺ"
+#define naudiz    "ᚾ"
+#define isaz      "ᛁ"
+#define jera      "ᛃ"
+#define eihwaz    "ᛇ"
+#define perth     "ᛈ"
+#define algiz     "ᛉ"
+#define sowilo    "ᛋ"
+#define tiwaz     "ᛏ"
+#define berkanan  "ᛒ"
+#define ehwaz     "ᛖ"
+#define mannaz    "ᛗ"
+#define laguz     "ᛚ"
+#define ingwaz    "ᛜ"
+#define othala    "ᛟ"
+#define dagaz     "ᛞ"
 
-static char* const othala_ehwaz  = "ᛟᛖ";
-static char* const kaunan_sowilo = "ᚲᛋ";
-static char* const ansuz_ansuz   = "ᚨ";
-static char* const hagalaz_raido = "ᚺᚱ";
-static char* const hagalaz_jera  = "ᚺᛃ";
-static char* const ingwaz_kaunan = "ᛜᚲ";
-static char* const hagalaz_wunjo = "ᚺᚹ";
-static char* const hagalaz_laguz = "ᚺᛚ";
+#define othala_ehwaz  "ᛟᛖ"
+#define kaunan_sowilo "ᚲᛋ"
+#define ansuz_ansuz   "ᚨ"
+#define hagalaz_raido "ᚺᚱ"
+#define hagalaz_jera  "ᚺᛃ"
+#define ingwaz_kaunan "ᛜᚲ"
+#define hagalaz_wunjo "ᚺᚹ"
+#define hagalaz_laguz "ᚺᛚ"
 
 typedef struct latin_rune_pair_s {
 	char* latin;
