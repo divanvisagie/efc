@@ -16,11 +16,13 @@ then
     echo "Found tag"
       tag=$(git describe --exact-match --tags HEAD)
     echo "Found tag $tag"
-    cd bin
+    cp bin/efc release/
+    cd release
     tar czf efc_$TRAVIS_OS_NAME_$tag.tar.gz *
-    cp efc_$TRAVIS_OS_NAME_$tag.tar.gz ../release/
+    mkdir ../pkg
+    cp efc_$TRAVIS_OS_NAME_$tag.tar.gz ../pkg/
     cd ..
-    ghr -u divanvisagie $tag release
+    ghr -u divanvisagie $tag pkg
 else
     echo "Tag not found"
 fi
