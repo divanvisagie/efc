@@ -42,13 +42,13 @@ static char* const ingwaz_kaunan = "ᛜᚲ";
 static char* const hagalaz_wunjo = "ᚺᚹ";
 static char* const hagalaz_laguz = "ᚺᛚ";
 
-typedef struct  {
+typedef struct latin_rune_pair_s {
 	char* latin;
 	char* rune;
 } latin_rune_pair;
 
 #define LRP_LEN 33
-latin_rune_pair* latin_rune_pairs[LRP_LEN] = {
+latin_rune_pair latin_rune_pairs[] = {
 
     // Basic Latin Alphabet
 	{ "a" ,  ansuz },
@@ -89,27 +89,28 @@ latin_rune_pair* latin_rune_pairs[LRP_LEN] = {
 
 };
 
-// latin_rune_pair* latin_sound_rune_pair[] = {
+#define LSP_LEN 13
+latin_rune_pair latin_sound_rune_pairs[] = {
 
-//     /**
-//      * The longer phonetics must go first because they are more unique and will 
-//      * not be replaced by the shorter strings later.
-//     */
-//     { "eau",  othala },
-// 	{ "chr",  hagalaz_raido },
-// 	{ "ing",  ingwaz },
-// 	{ "chl",  hagalaz_laguz },
-// 	{ "chj",  hagalaz_jera },
-// 	{ "chw",  hagalaz_wunjo },
+    /**
+     * The longer phonetics must go first because they are more unique and will 
+     * not be replaced by the shorter strings later.
+    */
+    { "eau",  othala },
+	{ "chr",  hagalaz_raido },
+	{ "ing",  ingwaz },
+	{ "chl",  hagalaz_laguz },
+	{ "chj",  hagalaz_jera },
+	{ "chw",  hagalaz_wunjo },
 
-// 	{ "ch" , gebo },
-// 	{ "ij" , ehwaz },
-// 	{ "cc" , kaunan_sowilo },
-// 	{ "th" ,  thurisaz },
-// 	{ "ng" ,  ingwaz },
-// 	{ "nk" ,  ingwaz_kaunan },
-// 	{ "ei" ,  sowilo }
-// };
+	{ "ch" , gebo },
+	{ "ij" , ehwaz },
+	{ "cc" , kaunan_sowilo },
+	{ "th" ,  thurisaz },
+	{ "ng" ,  ingwaz },
+	{ "nk" ,  ingwaz_kaunan },
+	{ "ei" ,  sowilo }
+};
 
 char* to_lower_case(char *s) {
   unsigned char *p = (unsigned char *)s;
@@ -122,17 +123,12 @@ char* to_lower_case(char *s) {
   return s;
 }
 
-char* replace_characters(char* victim, latin_rune_pair* latin_rune_map[]) {
-
-    // for (int i = 0; i < 33; i++) {
-    //     printf("%s \n", &latin_rune_map[i]->latin);
-    // }
+char* replace_characters(char* victim, latin_rune_pair latin_rune_map[], int length) {
 
     victim = to_lower_case(strdup(victim));
 	
-	for(int i=0; i < LRP_LEN; i++) {
-        printf("%s",&latin_rune_map[i]->latin);
-		// char* v = replace(lowercase, latin_rune_map[i]->latin, latin_rune_map[i]->rune);
+	for(int i=0; i < length; i++) {
+		victim = replace(victim, latin_rune_map[i].latin, latin_rune_map[i].rune);
 	}
 
 	free(victim);
@@ -140,7 +136,11 @@ char* replace_characters(char* victim, latin_rune_pair* latin_rune_map[]) {
 }
 
 char* get_futhark_for_latin(char* latin, bool phonetics) {
-    latin = replace_characters(latin, latin_rune_pairs);
+    if (phonetics) {
+        latin = replace_characters(latin, latin_sound_rune_pairs, LSP_LEN );
+    }
+    
+    latin = replace_characters(latin, latin_rune_pairs, LRP_LEN);
 
     return latin;
 }
