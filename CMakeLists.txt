@@ -11,3 +11,5 @@ add_executable(efc
     src/string_replacer.c
     src/deps/flag/flag.c
 )
+
+set_property(TARGET tgt PROPERTY C_STANDARD 99)
