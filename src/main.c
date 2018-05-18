@@ -5,7 +5,7 @@
 #include "futhark.h"
 #include "deps/flag/flag.h"
 
-#define VERSION "v0.8.3"
+#define VERSION "v0.8.4"
 
 int main(int argc, const char** argv) {
 
