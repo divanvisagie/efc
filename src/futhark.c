@@ -112,7 +112,7 @@ latin_rune_pair latin_sound_rune_pairs[] = {
 	{ "ei" ,  sowilo }
 };
 
-char* to_lower_case(char *s) {
+char* to_lower_case (char *s) {
   unsigned char *p = (unsigned char *)s;
 
   while (*p) {
@@ -123,24 +123,38 @@ char* to_lower_case(char *s) {
   return s;
 }
 
-char* replace_characters(char* victim, latin_rune_pair latin_rune_map[], int length) {
-
+char* replace_latin_characters (char* victim, latin_rune_pair latin_rune_map[], int length) {
     victim = to_lower_case(strdup(victim));
-	
-	for(int i = 0; i < length; i++) {
+	for (int i = 0; i < length; i++) {
 		victim = replace(victim, latin_rune_map[i].latin, latin_rune_map[i].rune);
 	}
-
-	free(victim);
+	free (victim);
     return victim;
 }
 
-char* get_futhark_for_latin(char* latin, bool phonetics) {
-    if (phonetics) {
-        latin = replace_characters(latin, latin_sound_rune_pairs, LSP_LEN );
+char* replace_rune_characters (char* victim, latin_rune_pair latin_rune_map[], int length) {
+    victim = to_lower_case(strdup(victim));
+    for (int i = 0; i < length; i++) {
+        victim = replace(victim, latin_rune_map[i].rune, latin_rune_map[i].latin);
     }
-    
-    latin = replace_characters(latin, latin_rune_pairs, LRP_LEN);
+    free (victim);
+    return victim;
+}
+
+char* get_futhark_for_latin (char* latin, bool phonetics) {
+    if (phonetics) {
+        latin = replace_latin_characters(latin, latin_sound_rune_pairs, LSP_LEN);
+    }
+    latin = replace_latin_characters(latin, latin_rune_pairs, LRP_LEN);
 
     return latin;
+}
+
+char* get_latin_for_futhark(char* futhark, bool phonetics) {
+    if (phonetics) {
+        futhark = replace_rune_characters(futhark, latin_sound_rune_pairs, LSP_LEN);
+    }
+    futhark = replace_rune_characters(futhark, latin_rune_pairs, LRP_LEN);
+
+    return futhark;
 }
