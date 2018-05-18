@@ -12,4 +12,4 @@ add_executable(efc
     src/deps/flag/flag.c
 )
 
-set_property(TARGET tgt PROPERTY C_STANDARD 99)
+set_property(TARGET efc PROPERTY C_STANDARD 99)
