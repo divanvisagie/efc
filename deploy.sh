@@ -18,9 +18,9 @@ then
     echo "Found tag $tag"
     cp bin/efc release/
     cd release
-    tar czf efc_$TRAVIS_OS_NAME_$tag.tar.gz *
+    tar czf efc-$TRAVIS_OS_NAME-$tag.tar.gz *
     mkdir ../pkg
-    cp efc_$TRAVIS_OS_NAME_$tag.tar.gz ../pkg/
+    cp efc-$TRAVIS_OS_NAME-$tag.tar.gz ../pkg/
     cd ..
     ghr -u divanvisagie $tag pkg
 else
