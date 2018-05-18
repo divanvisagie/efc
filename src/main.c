@@ -23,13 +23,14 @@ int main(int argc, const char** argv) {
     size_t linecap = 0;
     ssize_t linelen;
     while ((linelen = getline(&line, &linecap, stdin)) > 0) {
+
         char* translated = NULL;
         if (reverse) {
             translated = get_latin_for_futhark(line, phonetic);
         } else {
             translated = get_futhark_for_latin(line, phonetic);
         }
-        fputs(translated, stdout);
+        printf("%s", translated);
     }
 
     return 0;

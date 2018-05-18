@@ -17,7 +17,12 @@ then
       tag=$(git describe --exact-match --tags HEAD)
     echo "Found tag $tag"
     cp install.sh bin/
-    ghr -u divanvisagie $tag bin
+    cd bin
+    tar czf efc_$TRAVIS_OS_NAME.tar.gz *
+    mkdir ../release
+    cp efc_$TRAVIS_OS_NAME.tar.gz ../release/
+    cd ..
+    ghr -u divanvisagie $tag release
 else
     echo "Tag not found"
 fi

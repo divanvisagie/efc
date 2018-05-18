@@ -124,20 +124,18 @@ char* to_lower_case (char *s) {
 }
 
 char* replace_latin_characters (char* victim, latin_rune_pair latin_rune_map[], int length) {
-    victim = to_lower_case(strdup(victim));
+    victim = to_lower_case(victim);
 	for (int i = 0; i < length; i++) {
 		victim = replace(victim, latin_rune_map[i].latin, latin_rune_map[i].rune);
 	}
-	free (victim);
     return victim;
 }
 
 char* replace_rune_characters (char* victim, latin_rune_pair latin_rune_map[], int length) {
-    victim = to_lower_case(strdup(victim));
+    victim = to_lower_case(victim);
     for (int i = 0; i < length; i++) {
         victim = replace(victim, latin_rune_map[i].rune, latin_rune_map[i].latin);
     }
-    free (victim);
     return victim;
 }
 
@@ -146,7 +144,6 @@ char* get_futhark_for_latin (char* latin, bool phonetics) {
         latin = replace_latin_characters(latin, latin_sound_rune_pairs, LSP_LEN);
     }
     latin = replace_latin_characters(latin, latin_rune_pairs, LRP_LEN);
-
     return latin;
 }
 
