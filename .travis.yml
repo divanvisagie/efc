@@ -10,4 +10,7 @@ script:
   - cmake .
   - make
 
+after_success:
+  - sh deploy.sh
+
 
