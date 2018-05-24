@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "futhark.h"
+#include "elder_futhark.h"
 #include "deps/flag/flag.h"
 
 #define VERSION "v0.8.8"

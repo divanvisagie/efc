@@ -1,4 +1,4 @@
-#include "futhark.h"
+#include "elder_futhark.h"
 #include "string_replacer.h"
 
 #include <string.h>
@@ -48,7 +48,7 @@ typedef struct latin_rune_pair_s {
 } latin_rune_pair;
 
 #define LRP_LEN 33
-latin_rune_pair latin_rune_pairs[] = {
+latin_rune_pair latin_elder_futhark_pairs[] = {
 
     // Basic Latin Alphabet
 	{ "a" ,  ansuz },
@@ -90,7 +90,7 @@ latin_rune_pair latin_rune_pairs[] = {
 };
 
 #define LSP_LEN 13
-latin_rune_pair latin_sound_rune_pairs[] = {
+latin_rune_pair latin_elder_futhark_phonetic_pairs[] = {
 
     /**
      * The longer phonetics must go first because they are more unique and will 
@@ -141,17 +141,19 @@ char* replace_rune_characters (char* victim, latin_rune_pair latin_rune_map[], i
 
 char* get_futhark_for_latin (char* latin, bool phonetics) {
     if (phonetics) {
-        latin = replace_latin_characters(latin, latin_sound_rune_pairs, LSP_LEN);
+        latin = replace_latin_characters(latin, latin_elder_futhark_phonetic_pairs
+	, LSP_LEN);
     }
-    latin = replace_latin_characters(latin, latin_rune_pairs, LRP_LEN);
+    latin = replace_latin_characters(latin, latin_elder_futhark_pairs, LRP_LEN);
     return latin;
 }
 
 char* get_latin_for_futhark(char* futhark, bool phonetics) {
     if (phonetics) {
-        futhark = replace_rune_characters(futhark, latin_sound_rune_pairs, LSP_LEN);
+        futhark = replace_rune_characters(futhark, latin_elder_futhark_phonetic_pairs
+	, LSP_LEN);
     }
-    futhark = replace_rune_characters(futhark, latin_rune_pairs, LRP_LEN);
+    futhark = replace_rune_characters(futhark, latin_elder_futhark_pairs, LRP_LEN);
 
     return futhark;
 }

@@ -7,7 +7,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 add_executable(efc 
     src/main.c 
-    src/futhark.c
+    src/elder_futhark.c
     src/string_replacer.c
     src/deps/flag/flag.c
 )
