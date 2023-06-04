@@ -16,14 +16,11 @@ int main(int argc, const char** argv) {
     flag_bool(&reverse, "reverse", "Convert Elder Futhark to Latin");
     flag_parse(argc, argv, VERSION);
 
-    /**
-     * Read from standard input
-    */
     char* line = NULL;
     size_t linecap = 0;
     ssize_t linelen;
-    while ((linelen = getline(&line, &linecap, stdin)) > 0) {
 
+    while ((linelen = getline(&line, &linecap, stdin)) > 0) {
         char* translated = NULL;
         if (reverse) {
             translated = get_latin_for_futhark(line, phonetic);
@@ -32,6 +29,7 @@ int main(int argc, const char** argv) {
         }
         printf("%s", translated);
     }
-
+    
+    free(line);
     return 0;
 }

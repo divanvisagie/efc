@@ -19,10 +19,8 @@ char* replace(char* s, char* victim, char* with) {
  
     // Counting the number of times old word
     // occur in the string
-    for (i = 0; s[i] != '\0'; i++)
-    {
-        if (strstr(&s[i], victim) == &s[i])
-        {
+    for (i = 0; s[i] != '\0'; i++) {
+        if (strstr(&s[i], victim) == &s[i]) {
             cnt++;
  
             // Jumping to index after the old word.
@@ -34,17 +32,16 @@ char* replace(char* s, char* victim, char* with) {
     result = (char *)malloc(i + cnt * (withlen - victimlen) + 1);
  
     i = 0;
-    while (*s)
-    {
+    while (*s) {
         // compare the substring with the result
-        if (strstr(s, victim) == s)
-        {
+        if (strstr(s, victim) == s) {
             strcpy(&result[i], with);
             i += withlen;
             s += victimlen;
         }
-        else
+        else {
             result[i++] = *s++;
+        }
     }
  
     result[i] = '\0';
